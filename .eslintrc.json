@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended",
+    "prettier/babel",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard",
+    "prettier/unicorn"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "max-len": ["error", { "code": 80, "ignoreUrls": true }],
+    "beforeBlockComment": true,
+    "afterBlockComment": true,
+    "beforeLineComment": true,
+    "afterLineComment": true,
+    "allowBlockStart": true,
+    "allowBlockEnd": true,
+    "allowObjectStart": true,
+    "allowObjectEnd": true,
+    "allowArrayStart": true,
+    "allowArrayEnd": true,
+    "quotes": [2, "backtick", "single"]
+  }
+}
