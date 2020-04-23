@@ -27,7 +27,10 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx"] }
+    ],
     "max-len": ["error", { "code": 80, "ignoreUrls": true }],
     "beforeBlockComment": true,
     "afterBlockComment": true,
