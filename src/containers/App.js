@@ -4,44 +4,55 @@ import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll.js';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { getRobots } from '../helpers/getRobots';
+import { connect } from 'react-redux';
+import { setSearchField, requestRobots } from '../actions';
 import './App.css';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      robots: [],
-      searchField: '',
-    };
-  }
-
-  onSearchChange = (event) => {
-    this.setState({ searchField: event.target.value });
+// parameter state comes from index.js provider store state(rootReducers)
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchRobots.searchField,
+    robots: state.requestRobots.robots,
+    isPending: state.requestRobots.isPending,
   };
+};
 
+// dispatch the DOM changes to call an action. note mapStateToProps returns object, mapDispatchToProps returns function
+// the function returns an object then uses connect to change the data from redecers.
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestRobots: () => dispatch(requestRobots()),
+  };
+};
+
+class App extends Component {
   componentDidMount() {
-    getRobots().then((users) => this.setState({ robots: users }));
+    this.props.onRequestRobots();
   }
 
   render() {
-    const { robots, searchField } = this.state;
+    const { robots, searchField, onSearchChange, isPending } = this.props;
     const filteredRobots = robots.filter((robot) => {
       return robot.name.toLowerCase().includes(searchField.toLowerCase());
     });
-    return !robots.length ? (
-      <h1 className="center">Loading!</h1>
-    ) : (
+    return (
       <div className="tc">
-        <h1 className="f1">RoboBuddies</h1>
-        <SearchBox searchChange={this.onSearchChange} />
+        <h1 className="f1">RoboFriends</h1>
+        <SearchBox searchChange={onSearchChange} />
         <Scroll>
-          <ErrorBoundary>
-            <Cards robots={filteredRobots} />
-          </ErrorBoundary>
+          {isPending ? (
+            <h1>Loading</h1>
+          ) : (
+            <ErrorBoundary>
+              <Cards robots={filteredRobots} />
+            </ErrorBoundary>
+          )}
         </Scroll>
       </div>
     );
   }
 }
 
-export default App;
+// action done from mapDispatchToProps will change state from mapStateToProps
+export default connect(mapStateToProps, mapDispatchToProps)(App);
