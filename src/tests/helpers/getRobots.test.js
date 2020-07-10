@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 import { addNumbers, getUsers } from '../../helpers/getRobots.js';
-import { mockedUsers } from './mocks';
+import { mockedUsers } from '../mocks';
 
 describe('add two numbers function', () => {
   it('adds two numbers', () => {

@@ -1,9 +1,9 @@
 import Card from '../../components/Card';
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 
 describe('<Card />', () => {
-  it('expect to render a Card component', () => {
+  it('expect to render Card component', () => {
     expect(shallow(<Card />)).toMatchSnapshot();
   });
 });
