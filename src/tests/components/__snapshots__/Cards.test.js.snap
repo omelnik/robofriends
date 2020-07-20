@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Cards /> expect to render a Cards component with mocked robots 1`] = `
+exports[`<Cards /> expect to render Cards component with mocked robots 1`] = `
 <div>
   <Card
     email="john@gmail.com"
